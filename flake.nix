@@ -14,7 +14,7 @@
         formatter = pkgs.nixfmt;
 
         devShells.default = pkgs.mkShell {
-          packages = with pkgs; [ nodejs_latest sqlite postgresql pnpm ];
+          packages = with pkgs; [ nodejs_latest sqlite postgresql pnpm dbmate ];
         };
       });
 }
