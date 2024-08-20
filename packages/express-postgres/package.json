@@ -1,0 +1,28 @@
+{
+  "name": "express-postgres",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon -e ts -x 'pnpm run build && clear; node build/main.js'",
+    "build": "esbuild --format=esm --platform=node --external=expresss --output-file=build/main.js",
+    "test": "vitest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.4.1",
+    "chance": "^1.1.12",
+    "express": "^4.19.2",
+    "postgres": "^3.4.4",
+    "ulid": "^2.3.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.23.1",
+    "nodemon": "^3.1.4",
+    "vitest": "^2.0.5"
+  }
+}
