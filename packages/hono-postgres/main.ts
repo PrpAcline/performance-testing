@@ -1,19 +1,18 @@
+import { Hono } from "hono";
+import { serve } from "@hono/node-server";
 import chance from "chance";
-import express from "express";
 import postgres from "postgres";
 
-const app = express();
-const port = process.env.PORT || 3000;
+const app = new Hono();
+const port = Number(process.env.PORT) || 3000;
 
 const sql = postgres(
   "postgresql://postgres:postgres@localhost:5432/db?sslmode=disable",
 );
 
-app.get("/up", (req, res) => {
-  res.status(200).json({ status: "ok" });
-});
+app.get("/up", (c) => c.json({ status: "ok" }));
 
-app.post("/users", async (req, res) => {
+app.post("/users", async (c) => {
   try {
     const result = await sql`
     INSERT INTO users (first_name, last_name, email)
@@ -21,22 +20,22 @@ app.post("/users", async (req, res) => {
     RETURNING first_name, last_name, email;
   `;
 
-    res.status(201).json({ success: true, user: result[0] });
+    return c.json({ success: true, user: result[0] });
   } catch (e) {
-    res.status(500).json(e);
+    return c.json(e, 500);
   }
 });
 
-app.get("/users", async (req, res) => {
+app.get("/users", async (c) => {
   try {
     const users = await sql`SELECT * FROM users;`;
 
-    return res.status(200).json({ users });
+    return c.json({ users });
   } catch (e) {
-    res.status(500).json(e);
+    return c.json(e, 500);
   }
 });
 
-app.listen(port, () => {
+serve({ fetch: app.fetch, port }, ({ port }) => {
   console.log(`listening on port ${port}`);
 });

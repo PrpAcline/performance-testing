@@ -1,5 +1,5 @@
 {
-  "name": "express-postgres",
+  "name": "hono-postgres",
   "version": "1.0.0",
   "description": "",
   "type": "module",
@@ -12,17 +12,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/express": "^4.17.21",
-    "@types/node": "^22.4.1",
+    "@hono/node-server": "^1.12.1",
     "chance": "^1.1.12",
-    "express": "^4.19.2",
-    "postgres": "^3.4.4",
-    "ulid": "^2.3.0"
+    "hono": "^4.5.6",
+    "postgres": "^3.4.4"
   },
   "devDependencies": {
     "@types/chance": "^1.1.6",
-    "esbuild": "^0.23.1",
-    "nodemon": "^3.1.4",
+    "@types/node": "^22.4.1",
     "vitest": "^2.0.5"
   }
 }
